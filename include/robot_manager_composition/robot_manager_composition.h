@@ -1,6 +1,7 @@
 #ifndef ROBOT_MANGER_COMPOSITION_H
 #define ROBOT_MANGER_COMPOSITION_H
 
+// #include "system_information.h"
 #include "ros/node_handle.h"
 #include "ros/service_server.h"
 #include <ros/ros.h>
