@@ -138,7 +138,8 @@ add_executable(system_information_test
 	src/system_information.cpp)
 add_executable(robot_manager_composition_node 
 	src/robot_manager_composition_node.cpp 
-	src/robot_manager_composition.cpp)
+	src/robot_manager_composition.cpp
+	src/system_information.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

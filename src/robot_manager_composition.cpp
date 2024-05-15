@@ -1,4 +1,5 @@
 #include "robot_manager_composition/robot_manager_composition.h"
+#include "robot_manager_composition/system_information.h"
 #include <ros/ros.h>
 #include <std_srvs/SetBool.h>
 #include <string>
@@ -9,6 +10,16 @@ RobotManagerComposition::RobotManagerComposition(ros::NodeHandle *nh)
                                       this)} {
 
   ROS_INFO("/robot_manager_output service: READY");
+}
+
+RobotManagerComposition::RobotManagerComposition(ros::NodeHandle *nh, ComputerUnit cm)
+    : enable_srv_{nh->advertiseService("robot_manager_output",
+                                      &RobotManagerComposition::serviceCallback,
+                                      this)},
+      computer_unit_{cm} {
+
+  ROS_INFO("/robot_manager_output service: READY");
+  ROS_INFO("/robot_manager_output service: console output disabled");
 }
 
 bool RobotManagerComposition::serviceCallback(
@@ -22,6 +33,8 @@ bool RobotManagerComposition::serviceCallback(
     else
       msg += "disabled";
     ROS_WARN("%s", msg.c_str());
+    if (output_enabled_)
+        computer_unit_.print_info();
 
     res.success = false;
     res.message = msg;
@@ -36,6 +49,8 @@ bool RobotManagerComposition::serviceCallback(
     else
       msg += "disabled";
     ROS_INFO("%s", msg.c_str());
+    if (output_enabled_)
+        computer_unit_.print_info();
 
     res.success = true;
     res.message = msg;
