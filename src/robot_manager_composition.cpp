@@ -3,11 +3,10 @@
 #include <std_srvs/SetBool.h>
 #include <string>
 
-RobotManagerComposition::RobotManagerComposition(bool enabled)
-    : output_enabled_{enabled}, enable_srv_{nh_.advertiseService(
-                                    "robot_manager_output",
-                                    &RobotManagerComposition::serviceCallback,
-                                    this)} {
+RobotManagerComposition::RobotManagerComposition(ros::NodeHandle *nh)
+    : enable_srv_{nh->advertiseService("robot_manager_output",
+                                      &RobotManagerComposition::serviceCallback,
+                                      this)} {
 
   ROS_INFO("/robot_manager_output service: READY");
 }

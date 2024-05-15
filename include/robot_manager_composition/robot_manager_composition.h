@@ -9,11 +9,11 @@
 
 class RobotManagerComposition {
     bool output_enabled_ = false;
-    ros::NodeHandle nh_;
     ros::ServiceServer enable_srv_;
 
 public:
-    RobotManagerComposition(bool enabled);
+    RobotManagerComposition() = default;
+    RobotManagerComposition(ros::NodeHandle *nh);
     ~RobotManagerComposition() = default;
 
     bool serviceCallback(std_srvs::SetBool::Request &req,

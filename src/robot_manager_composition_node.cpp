@@ -4,7 +4,8 @@
 int main(int argc, char **argv) {
     ros::init(argc, argv, "robot_manager_composition_node");
 
-    RobotManagerComposition rmc_node(false);
+    ros::NodeHandle nh;
+    RobotManagerComposition rmc_node(&nh);
 
     ros::spin();
 
